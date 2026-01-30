@@ -12,7 +12,7 @@ public final class UserFactory {
 
     private UserFactory() {}
 
-    // -------- CREATE (NEW USERS – hash ONCE) --------
+
 
     public static User createNewUser(
             String role,
@@ -37,7 +37,7 @@ public final class UserFactory {
         };
     }
 
-    // -------- LOAD (FROM FILE – NO hashing) --------
+
 
     public static User loadUser(
             String role,

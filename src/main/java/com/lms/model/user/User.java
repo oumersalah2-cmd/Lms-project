@@ -14,14 +14,14 @@ public abstract class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // protected String name;
-    private final String id;              // immutable identity
+    private final String id;
     private String fullName;
     private String email;
-    private String passwordHash;    // already-hashed
+    private String passwordHash;
 
     protected User(String id, String fullName, String email, String passwordHash) {
 
-        // Fail-fast validation
+
         if (id == null || id.isBlank())
             throw new IllegalArgumentException("User ID cannot be blank");
 
@@ -37,7 +37,7 @@ public abstract class User implements Serializable {
         this.passwordHash = passwordHash;
     }
 
-    // ---- Encapsulation ----
+
     public String getId() { return id; }
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
@@ -51,10 +51,10 @@ public abstract class User implements Serializable {
         this.passwordHash = passwordHash;
     }
 
-    // ---- Polymorphism ----
+
     public abstract String getRole();
 
-    // ---- Identity ----
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
