@@ -31,7 +31,7 @@ public class Course implements Serializable {
     public String getInstructorId() { return instructorId; }
     public String getStatus() { return status; }
 
-    // Implement the Setters properly
+    //Setters
     public void setTitle(String title) { this.title = title; }
     public void setDescription(String description) { this.description = description; }
     public void setStatus(String status) { this.status = status; }
