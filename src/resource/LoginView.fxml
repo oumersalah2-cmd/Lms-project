@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="main.java.com.lms.ui.controller.LoginController"
+      alignment="CENTER" spacing="20" prefWidth="400" prefHeight="500">
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <Label text="LMS Login">
+        <font>
+            <Font name="System Bold" size="24.0" />
+        </font>
+    </Label>
+
+    <TextField fx:id="emailField" promptText="Email" maxWidth="300"/>
+    <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300"/>
+
+    <Button text="Login" onAction="#onLoginClicked" maxWidth="250" 
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" defaultButton="true"/>
+
+    <Hyperlink text="No account? Register here" onAction="#onRegisterLinkClicked"/>
+</VBox>
