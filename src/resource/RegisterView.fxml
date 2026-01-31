@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="main.java.com.lms.ui.controller.RegisterController"
+      alignment="CENTER" spacing="12">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <Label text="Join LMS">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+
+    <TextField fx:id="fullNameField" promptText="Full Name" maxWidth="300"/>
+    <TextField fx:id="emailField" promptText="Email" maxWidth="300"/>
+    <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300"/>
+    
+    <ComboBox fx:id="roleComboBox" promptText="Select Role" maxWidth="300"/>
+    <TextField fx:id="extraField" promptText="Student Number / Department" maxWidth="300"/>
+
+    <Button text="Create Account" onAction="#handleRegister" maxWidth="300"
+            style="-fx-background-color: #2196F3; -fx-text-fill: white;" defaultButton="true"/>
+            
+    <Hyperlink text="Already have an account? Login" onAction="#onBackToLogin"/>
+</VBox>
