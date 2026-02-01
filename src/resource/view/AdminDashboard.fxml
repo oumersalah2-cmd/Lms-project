@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="main.java.com.yourorg.lms.ui.controller.AdminDashboardController"
+            stylesheets="@css/styles.css">
+    <left>
+        <fx:include source="components/Sidebar.fxml"/>
+    </left>
+    <center>
+        <VBox spacing="25" styleClass="main-container" onMouseClicked="#handleRootClick" id="mainContainer" focusTraversable="true">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
+            <VBox spacing="5">
+                <Label fx:id="welcomeLabel" text="System Administration" styleClass="header-label" />
+                <Label text="Manage users, courses, and system health" style="-fx-text-fill: #95a5a6;" />
+            </VBox>
+
+            <HBox spacing="20">
+                <VBox styleClass="card" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                    <Label text="Total Users" style="-fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+                    <Label fx:id="totalUsersLabel" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                </VBox>
+                <VBox styleClass="card" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                    <Label text="System Status" style="-fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+                    <Label text="ONLINE" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #27ae60;" />
+                </VBox>
+            </HBox>
+
+            <VBox spacing="15" VBox.vgrow="ALWAYS" styleClass="card">
+                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Label text="User Management" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    
+                    <TextField fx:id="searchField" promptText="Search users..." prefWidth="200" styleClass="search-field"/>
+                    
+                    <Button text="+ Add User" onAction="#handleAddUser" 
+                            style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-cursor: hand; -fx-font-weight: bold;" />
+                </HBox>
+
+                <TableView fx:id="userTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colRole" text="Role" prefWidth="120" />
+                        <TableColumn fx:id="colName" text="Full Name" prefWidth="250" />
+                        <TableColumn fx:id="colEmail" text="Email" prefWidth="280" />
+                    </columns>
+                    <placeholder>
+                        <Label text="No users found matching your criteria." />
+                    </placeholder>
+                </TableView>
+
+                <HBox alignment="CENTER_RIGHT">
+                    <Button text="Delete Selected User" onAction="#handleDeleteUser" 
+                            style="-fx-text-fill: #e74c3c; -fx-background-color: transparent; -fx-cursor: hand;" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
