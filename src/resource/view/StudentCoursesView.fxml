@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="main.java.com.yourorg.lms.ui.controller.StudentCoursesController"
+            stylesheets="@css/styles.css"
+            prefWidth="1000.0" prefHeight="700.0" 
+            maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308">
+    
+    <left>
+        <fx:include source="components/Sidebar.fxml"/>
+    </left>
+
+    <center>
+        <VBox fx:id="mainContainer" spacing="20" styleClass="main-container" 
+              focusTraversable="true" onMouseClicked="#handleRootClick" VBox.vgrow="ALWAYS"  maxWidth="Infinity">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
+            <VBox spacing="5">
+                <Label text="My Learning Path" styleClass="header-label" />
+                <Label text="View your progress and enroll in new opportunities." style="-fx-text-fill: #7f8c8d; -fx-font-size: 14px;" />
+            </VBox>
+
+            <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE" styleClass="custom-tab-pane">
+                <tabs>
+                    <Tab text="📘 Enrolled Courses">
+                        <VBox spacing="15" style="-fx-padding: 20 0 0 0;">
+                            <TableView fx:id="enrolledTable" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colCourseCode" text="Code" prefWidth="100"/>
+                                    <TableColumn fx:id="colCourseName" text="Course Name" prefWidth="300"/>
+                                    <TableColumn fx:id="colInstructor" text="Instructor" prefWidth="200"/>
+                                    <TableColumn fx:id="colGrade" text="Grade" prefWidth="100"/>
+                                </columns>
+                                <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                </columnResizePolicy>
+                                <placeholder>
+                                    <Label text="You haven't enrolled in any courses yet."/>
+                                </placeholder>
+                            </TableView>
+                        </VBox>
+                    </Tab>
+                    
+                    <Tab text="🔍 Course Catalog">
+                        <VBox spacing="15" style="-fx-padding: 20 0 0 0;">
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <TextField fx:id="searchField" promptText="Search courses or codes..." prefWidth="350" 
+                                           style="-fx-background-radius: 20; -fx-padding: 8 15;"/>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button text="Enroll Selected" onAction="#handleEnroll" 
+                                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                            </HBox>
+                            <TableView fx:id="catalogTable" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colCatName" text="Course Name" prefWidth="250"/>
+                                    <TableColumn fx:id="colCatDesc" text="Description" prefWidth="450"/>
+                                    <TableColumn fx:id="colCatSeats" text="Status" prefWidth="100"/>
+                                </columns>
+                                <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                </columnResizePolicy>
+                            </TableView>
+                        </VBox>
+                    </Tab>
+                </tabs>
+            </TabPane>
+        </VBox>
+    </center>
+</BorderPane>
