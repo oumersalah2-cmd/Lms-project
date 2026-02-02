@@ -1,4 +1,4 @@
-package main.java.com.yourorg.lms.ui.controller;
+package main.java.com.lms.ui.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -5,7 +5,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11" 
             xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="main.java.com.yourorg.lms.ui.controller.AdminDashboardController"
+            fx:controller="main.java.com.lms.ui.controller.AdminDashboardController"
             stylesheets="@css/styles.css">
     <left>
         <fx:include source="components/Sidebar.fxml"/>

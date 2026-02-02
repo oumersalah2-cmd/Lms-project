@@ -1,4 +1,4 @@
-package main.java.com.yourorg.lms.ui.controller;
+package main.java.com.lms.ui.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

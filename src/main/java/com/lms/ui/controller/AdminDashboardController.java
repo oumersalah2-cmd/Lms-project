@@ -1,4 +1,4 @@
-package main.java.com.yourorg.lms.ui.controller;
+package main.java.com.lms.ui.controller;
 
 import main.java.com.yourorg.lms.ui.util.AlertUtil;
 // import javax.swing.text.ViewFactory; // Removed incorrect import
