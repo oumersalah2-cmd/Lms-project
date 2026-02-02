@@ -25,8 +25,6 @@ public class SettingsController {
             nameField.setText(current.getName());
             emailField.setText(current.getEmail());
             roleField.setText(current.getRole().toUpperCase());
-            
-            // Pro Tip: Email and Role should be read-only in a standard LMS
             emailField.setEditable(false);
             roleField.setEditable(false);
             emailField.setStyle("-fx-opacity: 0.7; -fx-background-color: #f4f4f4;");
@@ -49,11 +47,8 @@ public class SettingsController {
         current.setFullName(newName);
         
         if (!newPassInput.isEmpty()) {
-            // IMPORTANT: Update the password hash field in your model
             current.setPasswordHash(SecurityUtil.hash(newPassInput)); 
         }
-
-        // PERSIST: This triggers the rewriteFile() logic we added to the Repo
         FileUserRepository.getInstance().update(current);
         
         showAlert(Alert.AlertType.INFORMATION, "Success", "Profile and Password updated!");
@@ -72,14 +67,11 @@ public class SettingsController {
     
     @FXML
     private void handleCancel() {
-        // Re-run the initialization logic to restore original data
         User current = SessionManager.getCurrentUser();
         if (current != null) {
             nameField.setText(current.getName());
             currentPassField.clear();
             newPassField.clear();
-            
-            // Optional: Show a brief notification in the console or a small label
             System.out.println("[SETTINGS] Changes discarded.");
         }
     }

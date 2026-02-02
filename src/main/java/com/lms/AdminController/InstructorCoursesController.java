@@ -36,8 +36,6 @@ public class InstructorCoursesController {
                 FileEnrollmentRepository.getInstance().getEnrollmentCount(cellData.getValue().getId())
             )
         );
-
-        // FIXED: Now pulls actual status from the Course object
         colStatus.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getStatus())
         );
@@ -54,14 +52,13 @@ public class InstructorCoursesController {
                 .collect(Collectors.toList());
 
         myCoursesTable.setItems(FXCollections.observableArrayList(myCourses));
-        myCoursesTable.refresh(); // Force the table to redraw
+        myCoursesTable.refresh();
     }
 
     @FXML
     private void handleCreateCourse() {
         Dialog<Course> dialog = new Dialog<>();
         dialog.setTitle("Create New Course");
-        // Ensure pop-up centers on the app window
         dialog.initOwner(myCoursesTable.getScene().getWindow());
 
         ButtonType createButtonType = new ButtonType("Create", ButtonBar.ButtonData.OK_DONE);
@@ -151,8 +148,6 @@ public class InstructorCoursesController {
             loadInstructorCourses();
         });
     }
-    
-    // ... handleArchiveCourse and handleViewStudents remain same ...
 
       @FXML
     private void handleViewStudents() {
@@ -161,21 +156,15 @@ public class InstructorCoursesController {
             AlertUtil.show(Alert.AlertType.WARNING, "No Selection", "Please select a course to view students.");
             return;
         }
-
-        // 1. Fetch the names from the repository
         List<String> studentNames = FileEnrollmentRepository.getInstance()
                                         .getStudentNamesForCourse(selected.getId());
 
-        // 2. Create the Pop-up Dialog
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Enrolled Students");
         dialog.setHeaderText("Students currently in: " + selected.getTitle());
         dialog.initOwner(myCoursesTable.getScene().getWindow());
-        
         ButtonType closeButton = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().add(closeButton);
-
-        // 3. Create a ListView to show names
         ListView<String> listView = new ListView<>();
         listView.setPrefHeight(200);
         
@@ -184,8 +173,6 @@ public class InstructorCoursesController {
         } else {
             listView.setItems(FXCollections.observableArrayList(studentNames));
         }
-
-        // 4. Set the Layout
         VBox container = new VBox(10, new Label("Student List:"), listView);
         container.setPadding(new Insets(20));
         dialog.getDialogPane().setContent(container);

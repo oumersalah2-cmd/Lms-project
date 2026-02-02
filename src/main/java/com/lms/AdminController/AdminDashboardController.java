@@ -31,8 +31,7 @@ public class AdminDashboardController {
     @FXML private TableColumn<User, String> colRole;
     @FXML private TableColumn<User, String> colName;
     @FXML private TableColumn<User, String> colEmail;
-    
-    // Master list that holds all data
+
     private final ObservableList<User> masterUserData = FXCollections.observableArrayList();
 
     @FXML
@@ -51,8 +50,6 @@ public class AdminDashboardController {
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        
-        // Professional Touch: Auto-resize columns
         userTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
@@ -81,8 +78,6 @@ public class AdminDashboardController {
                 return user.getRole().toLowerCase().contains(lowerCaseFilter);
             });
         });
-
-        // Wrap the FilteredList in a SortedList so sorting still works
         SortedList<User> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(userTable.comparatorProperty());
         userTable.setItems(sortedData);
@@ -90,7 +85,6 @@ public class AdminDashboardController {
 
     @FXML
     private void handleAddUser() {
-        // Logic for the green "+ Add User" button in your screenshot
         System.out.println("[ADMIN] Opening Add User Dialog...");
         ViewFactory.showUserCreationModal(); 
         loadUserData();
@@ -109,10 +103,7 @@ public class AdminDashboardController {
     private void handleDeleteUser() {
         User selected = userTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            // 1. Delete from Repo (this triggers rewriteFile)
             FileUserRepository.getInstance().delete(selected.getId());
-            
-            // 2. Refresh UI by reloading from the updated Repo
             loadUserData(); 
             
             AlertUtil.show(Alert.AlertType.INFORMATION, "Deleted", "User has been removed from the system.");

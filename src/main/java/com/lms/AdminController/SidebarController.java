@@ -41,15 +41,12 @@ public class SidebarController {
         boolean isInstructor = role.equals("INSTRUCTOR");
         boolean isStudent = role.equals("STUDENT");
 
-        // Admin Tools only for Admin
         adminBtn.setVisible(isAdmin);
         adminBtn.setManaged(isAdmin);
 
-        // Instructor-specific button
         teachingBtn.setVisible(isInstructor);
         teachingBtn.setManaged(isInstructor);
 
-        // Student-specific button (Courses view)
         coursesBtn.setVisible(isStudent);
         coursesBtn.setManaged(isStudent);
     }
@@ -60,9 +57,8 @@ public class SidebarController {
         User current = SessionManager.getCurrentUser();
         if (current == null) return;
 
-        // Routing logic: Dashboard is the "Home" for each role
         switch (current.getRole().toUpperCase()) {
-            case "ADMIN" -> ViewFactory.showAdminDashboard(); // The User Management page you have
+            case "ADMIN" -> ViewFactory.showAdminDashboard();
             case "INSTRUCTOR" -> ViewFactory.showInstructorDashboard();
             default -> ViewFactory.showStudentDashboard();
         }
@@ -83,8 +79,6 @@ public class SidebarController {
         highlightActiveButton(coursesBtn);
         User current = SessionManager.getCurrentUser();
         if (current == null) return;
-
-        // Role-based course view
         switch (current.getRole().toUpperCase()) {
             case "STUDENT" -> ViewFactory.showStudentCourses();
             case "INSTRUCTOR" -> ViewFactory.showInstructorCourses();
@@ -123,10 +117,8 @@ public class SidebarController {
         boolean collapsing = sidebarVBox.getPrefWidth() > 70;
         double targetWidth = collapsing ? 60 : 220;
 
-        // 1. Set the new width
         sidebarVBox.setPrefWidth(targetWidth);
 
-        // 2. Handle the text/labels
         if (collapsing) {
             dashboardBtn.setText("🏠");
             coursesBtn.setText("📚");

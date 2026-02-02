@@ -20,12 +20,10 @@ import main.java.com.yourorg.lms.util.SessionManager;
 public class StudentCoursesController {
 
     @FXML private VBox mainContainer;
-    
-    // Tab 1: Enrolled
+
     @FXML private TableView<Course> enrolledTable;
     @FXML private TableColumn<Course, String> colCourseCode, colCourseName, colInstructor, colGrade;
 
-    // Tab 2: Catalog
     @FXML private TextField searchField;
     @FXML private TableView<Course> catalogTable;
     @FXML private TableColumn<Course, String> colCatName, colCatDesc, colCatSeats;
@@ -40,24 +38,19 @@ public class StudentCoursesController {
     }
 
     private void setupTableFactories() {
-        // Enrolled Table
         colCourseCode.setCellValueFactory(new PropertyValueFactory<>("id"));
         colCourseName.setCellValueFactory(new PropertyValueFactory<>("title"));
         colInstructor.setCellValueFactory(new PropertyValueFactory<>("instructorId"));
-
-        // Catalog Table
         colCatName.setCellValueFactory(new PropertyValueFactory<>("title"));
         colCatDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
     }
 
     private void loadData() {
         String studentId = SessionManager.getCurrentUser().getId();
-        
-        // Load Enrolled
+
         List<Course> enrolled = EnrollmentService.getInstance().getStudentEnrolledCourses(studentId);
         enrolledTable.setItems(FXCollections.observableArrayList(enrolled));
 
-        // Load Catalog
         List<Course> allCourses = FileCourseRepository.getInstance().findAll();
         filteredCatalog = new FilteredList<>(FXCollections.observableArrayList(allCourses), p -> true);
         catalogTable.setItems(filteredCatalog);
@@ -77,28 +70,21 @@ public class StudentCoursesController {
     @FXML
     private void handleEnroll() {
         Course selected = catalogTable.getSelectionModel().getSelectedItem();
-        
-        // 1. Check for Selection
+
         if (selected == null) {
             AlertUtil.show(Alert.AlertType.WARNING, "No Selection", "Please select a course from the catalog first.");
             return;
         }
 
-        // 2. Try to Enroll
         try {
             EnrollmentService.getInstance().enrollCurrentStudent(selected.getId());
-            
-            // Success Alert
             AlertUtil.show(Alert.AlertType.INFORMATION, "Success", "You have successfully enrolled in " + selected.getTitle());
-            
-            loadData(); // Refresh tables
+            loadData();
 
         } catch (IllegalStateException e) {
-            // Known Logic Errors (Already enrolled, etc.)
             AlertUtil.show(Alert.AlertType.ERROR, "Enrollment Failed", e.getMessage());
             
         } catch (Exception e) {
-            // Unexpected System Errors
             e.printStackTrace();
             AlertUtil.show(Alert.AlertType.ERROR, "System Error", "An unexpected error occurred: " + e.getMessage());
         }

@@ -20,10 +20,7 @@ public class RegisterController {
     private ComboBox<String> roleComboBox;
 
     @FXML
-    private TextField extraField; 
-    // Used as:
-    // - Student Number (STUDENT)
-    // - Department (INSTRUCTOR)
+    private TextField extraField;
 
     private final AuthService authService = AuthService.getInstance();
 
@@ -31,8 +28,6 @@ public class RegisterController {
     public void initialize() {
         roleComboBox.getItems().addAll("STUDENT", "INSTRUCTOR");
         roleComboBox.setValue("STUDENT");
-
-        // UX hint based on role
         roleComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
             if ("STUDENT".equals(newVal)) {
                 extraField.setPromptText("Student Number");
@@ -46,12 +41,12 @@ public class RegisterController {
     private void handleRegister() {
         try {
             authService.register(
-                roleComboBox.getValue(), // role
-                java.util.UUID.randomUUID().toString().substring(0, 8), // generate a random ID
-                fullNameField.getText(), // fullName
-                emailField.getText(),    // email
-                passwordField.getText(), // rawPassword
-                extraField.getText()     // extraField
+                roleComboBox.getValue(),
+                java.util.UUID.randomUUID().toString().substring(0, 8),
+                fullNameField.getText(),
+                emailField.getText(),
+                passwordField.getText(),
+                extraField.getText()
             );
             showAlert(Alert.AlertType.INFORMATION,
                     "Registration Successful",

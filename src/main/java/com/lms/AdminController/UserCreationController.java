@@ -32,22 +32,14 @@ public class UserCreationController {
         String rawPassword = passwordField.getText();
 
         if (name.isEmpty() || email.isEmpty() || role == null || rawPassword.isEmpty()) {
-            // Show an alert if fields are empty
             return;
         }
 
-        // 1. Hash the password before saving
         String hashedPassword = SecurityUtil.hash(rawPassword);
         String id = "U-" + System.currentTimeMillis();
-
-        // 2. Create and Save
         User newUser = UserFactory.loadUser(role, id, name, email, hashedPassword, "-");
         FileUserRepository.getInstance().save(newUser);
-
-        // 3. IMPORTANT: Refresh the Dashboard Cache
         FileUserRepository.getInstance().refreshCache();
-
-        // 4. Close the window
         handleCancel();
     }
 

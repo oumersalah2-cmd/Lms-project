@@ -22,8 +22,7 @@ public class AdminCatalogController {
     @FXML private TableColumn<Course, String> colId;
     @FXML private TableColumn<Course, String> colName;
     @FXML private TableColumn<Course, String> colInstructor;
-    
-    // Master list for all courses in the system
+
     private final ObservableList<Course> masterCourseData = FXCollections.observableArrayList();
 
     @FXML
@@ -38,8 +37,6 @@ public class AdminCatalogController {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("title"));
         colInstructor.setCellValueFactory(new PropertyValueFactory<>("instructorId"));
-        
-        // Ensure the table fills the available width
         globalTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
@@ -49,7 +46,6 @@ public class AdminCatalogController {
     }
 
     private void loadCourseData() {
-        // Mock data to test the Admin Tools view
         masterCourseData.addAll(
             new Course("CS101", "Introduction to Java", "Basic programming concepts", "INST_001", "active"),
             new Course("MATH202", "Calculus II", "Integration and series", "INST_042", "active"),
@@ -62,8 +58,6 @@ public class AdminCatalogController {
 
     private void setupSearchFilter() {
         FilteredList<Course> filteredData = new FilteredList<>(masterCourseData, p -> true);
-
-        // Listen for text changes in the search field
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(course -> {
                 if (newValue == null || newValue.isEmpty()) return true;

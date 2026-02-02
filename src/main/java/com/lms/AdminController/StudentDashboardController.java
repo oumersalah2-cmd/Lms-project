@@ -64,16 +64,12 @@ public class StudentDashboardController {
     @FXML
     public void initialize() {
         User currentUser = SessionManager.getCurrentUser();
-        
-        // ... (Your existing security checks) ...
 
         if (currentUser instanceof Student student) {
             welcomeLabel.setText("Welcome, " + student.getName());
-
             setupTableColumns();
             loadDashboardData(student);
-            
-            // FIX: Remove focus from search/buttons when clicking background
+
             if (mainContainer != null) {
                 mainContainer.setFocusTraversable(true);
                 mainContainer.setOnMouseClicked(e -> mainContainer.requestFocus());
@@ -82,18 +78,14 @@ public class StudentDashboardController {
     }
 
     private void loadDashboardData(Student student) {
-        // 1. Existing Course Loading logic...
         List<Course> enrolled = enrollmentService.getStudentEnrolledCourses(student.getId());
         courseTable.setItems(FXCollections.observableArrayList(enrolled));
         activeCoursesCount.setText(String.valueOf(enrolled.size()));
-
-        // 2. NEW: Dynamic Task Count
         long pendingTasks = TaskService.getInstance().getPendingTaskCount(student.getId());
         
         if (tasksDueCount != null) {
             tasksDueCount.setText(String.valueOf(pendingTasks));
-            
-            // Bonus: Change color to red if there are many tasks
+
             if (pendingTasks > 0) {
                 tasksDueCount.setStyle("-fx-text-fill: #e67e22; -fx-font-size: 28px; -fx-font-weight: bold;");
             } else {
@@ -108,18 +100,13 @@ public class StudentDashboardController {
     private void setupTableColumns() {
         TableColumn<Course, String> idColumn = new TableColumn<>("Course ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        idColumn.setPrefWidth(150); // Fixed width for ID
+        idColumn.setPrefWidth(150);
 
         TableColumn<Course, String> titleColumn = new TableColumn<>("Course Name");
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        
-        // POLISH: Make the title column take up all remaining space
         titleColumn.prefWidthProperty().bind(courseTable.widthProperty().subtract(155));
-
         courseTable.getColumns().clear();
         courseTable.getColumns().addAll(idColumn, titleColumn);
-        
-        // POLISH: Set a "No Content" placeholder
         courseTable.setPlaceholder(new Label("You are not enrolled in any courses yet."));
     }
 
@@ -127,7 +114,6 @@ public class StudentDashboardController {
     private void handleRefresh() {
         User currentUser = SessionManager.getCurrentUser();
         if (currentUser instanceof Student student) {
-            // Force the service to re-check the data source
             System.out.println("[UI] Refreshing student dashboard data...");
             loadDashboardData(student);
         }
@@ -148,14 +134,11 @@ public class StudentDashboardController {
         header.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
         ListView<HBox> taskListView = new ListView<>();
-        // In a real app, load this from TaskService.getInstance().getTasks(studentId)
-        // Change the list to use StudentTask
         ObservableList<StudentTask> tasks = FXCollections.observableArrayList(
             new StudentTask("T-INIT-1", currentStudentId, "Submit Java Assignment", false),
             new StudentTask("T-INIT-2", currentStudentId, "Review Quiz 1", false)
         );
 
-        // Update your refresh logic to use the new name
         final Runnable[] refreshList = new Runnable[1];
         refreshList[0] = () -> {
             taskListView.getItems().clear();
@@ -163,7 +146,6 @@ public class StudentDashboardController {
                 CheckBox cb = new CheckBox(t.getTitle());
                 cb.setSelected(t.isCompleted());
 
-                // Spacer to push the delete button to the right
                 Region spacer = new Region();
                 HBox.setHgrow(spacer, Priority.ALWAYS);
 
@@ -183,7 +165,6 @@ public class StudentDashboardController {
 
         refreshList[0].run();
 
-        // Input area to add new tasks
         HBox inputArea = new HBox(10);
         TextField taskInput = new TextField();
         taskInput.setPromptText("New task...");
@@ -193,14 +174,10 @@ public class StudentDashboardController {
         addBtn.setOnAction(e -> {
             String input = taskInput.getText().trim();
             if (!input.isEmpty()) {
-                // Generate a simple unique ID using timestamp
                 String taskId = "T-" + System.currentTimeMillis();
-                
-                // Create the object with all 4 arguments
                 StudentTask newTask = new StudentTask(taskId, currentStudentId, input, false);
-                
                 tasks.add(newTask);
-                TaskService.getInstance().addTask(newTask); // Save to service
+                TaskService.getInstance().addTask(newTask);
                 
                 taskInput.clear();
                 refreshList[0].run();
