@@ -6,10 +6,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.java.com.yourorg.lms.model.user.User;
-import main.java.com.yourorg.lms.model.user.UserFactory;
-import main.java.com.yourorg.lms.repository.impl.FileUserRepository;
-import main.java.com.yourorg.lms.util.SecurityUtil;
+import main.java.com.lms.model.user.User;
+import main.java.com.lms.model.user.UserFactory;
+import main.java.com.lms.repository.impl.FileUserRepository;
+import main.java.com.lms.util.SecurityUtil;
 
 public class UserCreationController {
     @FXML private TextField nameField;

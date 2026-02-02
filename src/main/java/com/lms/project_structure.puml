@@ -1,0 +1,443 @@
+@startuml
+class main.java.com.yourorg.lms.model.user.Student {
+- {static} long serialVersionUID
+- String studentNumber
+- List<String> enrolledCourseIds
++ String getRole()
++ String getStudentNumber()
++ void enroll(String)
++ List<String> getEnrolledCourseIds()
+}
+
+
+class main.java.com.yourorg.lms.model.user.Instructor {
+- {static} long serialVersionUID
+- String department
++ String getRole()
++ String getDepartment()
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.AdminCatalogController {
+- TextField searchField
+- ComboBox<String> filterBox
+- TableView<Course> globalTable
+- TableColumn<Course,String> colId
+- TableColumn<Course,String> colName
+- TableColumn<Course,String> colInstructor
+- ObservableList<Course> masterCourseData
++ void initialize()
+- void setupTableColumns()
+- void setupFilterBox()
+- void loadCourseData()
+- void setupSearchFilter()
+- void handleDeleteCourse()
+- void showWarning(String,String)
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.InstructorDashboardController {
+- Label welcomeLabel
+- Label taughtCountLabel
+- TableView<Course> instructorCourseTable
+- TableColumn<Course,String> colCourseName
+- TableColumn<Course,Integer> colEnrollment
+- Label lblTotalStudents
+- TableView<Course> myCoursesTable
++ void initialize()
+- void setupTable()
+- void loadDashboardData()
+- void loadInstructorCourses()
+- void handleDeleteCourse()
+}
+
+
+class main.java.com.yourorg.lms.model.course.Enrollment {
+- {static} long serialVersionUID
+- String studentId
+- String courseId
+- LocalDate enrollmentDate
++ String getStudentId()
++ String getCourseId()
++ LocalDate getEnrollmentDate()
+}
+
+
+class main.java.com.yourorg.lms.app.Launcher {
++ {static} void main(String[])
+}
+
+interface main.java.com.yourorg.lms.repository.UserRepository {
+~ void save(User)
+~ User findByEmail(String)
+~ List<User> findAll()
+~ void delete(String)
+~ void update(User)
+}
+
+class main.java.com.yourorg.lms.util.SecurityUtil {
++ {static} String hash(String)
++ {static} boolean verifyPassword(String,String)
+}
+
+class main.java.com.yourorg.lms.ui.controller.InstructorCoursesController {
+- TableView<Course> myCoursesTable
+- TableColumn<Course,String> colId
+- TableColumn<Course,String> colTitle
+- TableColumn<Course,Integer> colEnrollment
+- TableColumn<Course,String> colStatus
++ void initialize()
+- void loadInstructorCourses()
+- void handleCreateCourse()
+- void handleEditDetails()
+- void handleViewStudents()
+}
+
+
+class main.java.com.yourorg.lms.ui.util.ViewFactory {
+- {static} Stage primaryStage
+- {static} String VIEW_PATH
++ {static} void setPrimaryStage(Stage)
++ {static} void showLoginWindow()
++ {static} void showStudentDashboard()
++ {static} void showRegisterWindow()
++ {static} void showInstructorDashboard()
++ {static} void showAdminDashboard()
++ {static} void showStudentCourses()
++ {static} void showInstructorCourses()
++ {static} void showAdminCourseCatalog()
++ {static} void showSettings()
++ {static} void showUserCreationModal()
+- {static} void loadScene(String,String)
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.LoginController {
+- TextField emailField
+- PasswordField passwordField
+- AuthService authService
+- void onLoginClicked()
+- void onRegisterLinkClicked()
+- void showError(String)
+}
+
+
+class main.java.com.yourorg.lms.repository.impl.FileUserRepository {
+- {static} FileUserRepository instance
+- {static} Path DATA_PATH
+- {static} Path USER_FILE
+- List<User> cache
++ {static} FileUserRepository getInstance()
+- void initStorage()
++ void refreshCache()
++ void save(User)
++ User findByEmail(String)
++ List<User> findAll()
++ void delete(String)
++ void update(User)
+- void rewriteFile()
++ User findById(String)
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.StudentDashboardController {
+- Label welcomeLabel
+- Label activeCoursesCount
+- Label tasksDueCount
+- javafx.scene.layout.VBox mainContainer
+- TableView<Course> courseTable
+- EnrollmentService enrollmentService
+- void handleLogout()
++ void initialize()
+- void loadDashboardData(Student)
+- void setupTableColumns()
+- void handleRefresh()
+- void showTaskDialog()
+- void updateTaskCount(int)
+}
+
+
+class main.java.com.yourorg.lms.repository.impl.FileEnrollmentRepository {
+- {static} Path DATA_DIR
+- {static} Path FILE
+- {static} String DELIMITER
+- {static} FileEnrollmentRepository instance
+- List<Enrollment> cache
++ {static} FileEnrollmentRepository getInstance()
+- void initStorage()
++ void enroll(String,String)
++ boolean isEnrolled(String,String)
++ List<String> getCourseIdsByStudent(String)
+- void refreshCache()
++ int getEnrollmentCount(String)
++ void deleteEnrollmentsByCourse(String)
++ List<String> getStudentNamesForCourse(String)
+}
+
+
+class main.java.com.yourorg.lms.model.user.Admin {
+- {static} long serialVersionUID
++ String getRole()
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.AdminDashboardController {
+- Label welcomeLabel
+- VBox mainContainer
+- Label totalUsersLabel
+- TextField searchField
+- TableView<User> userTable
+- TableColumn<User,String> colRole
+- TableColumn<User,String> colName
+- TableColumn<User,String> colEmail
+- ObservableList<User> masterUserData
++ void initialize()
+- void setupTableColumns()
+- void loadUserData()
+- void setupSearchFilter()
+- void handleAddUser()
+- void handleRootClick()
+- void handleDeleteUser()
+}
+
+
+class main.java.com.yourorg.lms.util.SessionManager {
+- {static} SessionManager instance
+- {static} User currentUser
++ {static} SessionManager getInstance()
++ {static} void login(User)
++ {static} void logout()
++ {static} User getCurrentUser()
++ boolean isLoggedIn()
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.UserCreationController {
+- TextField nameField
+- TextField emailField
+- ComboBox<String> roleBox
+- PasswordField passwordField
++ void initialize()
+- void handleSave()
+- void handleCancel()
+}
+
+
+class main.java.com.yourorg.lms.model.course.StudentTask {
+- String studentId
+- String id
+- String title
+- boolean completed
++ String getTitle()
++ String getStudentId()
++ boolean isCompleted()
++ void setCompleted(boolean)
+}
+
+
+class main.java.com.yourorg.lms.service.EnrollmentService {
+- {static} EnrollmentService instance
+- EnrollmentRepository enrollmentRepo
+- CourseRepository courseRepo
++ {static} EnrollmentService getInstance()
++ void enrollCurrentStudent(String)
++ List<Course> getStudentEnrolledCourses(String)
+}
+
+
+interface main.java.com.yourorg.lms.repository.EnrollmentRepository {
+~ void enroll(String,String)
+~ boolean isEnrolled(String,String)
+~ List<String> getCourseIdsByStudent(String)
+}
+
+interface main.java.com.yourorg.lms.repository.CourseRepository {
+~ void save(Course)
+~ void update(Course)
+~ void delete(String)
+~ List<Course> findAll()
+~ Course findById(String)
+~ void delete(Course)
+~ List<Course> findByInstructor(String)
+}
+
+class main.java.com.yourorg.lms.repository.impl.FileCourseRepository {
+- {static} Path DATA_DIR
+- {static} Path COURSE_FILE
+- {static} String DELIMITER
+- {static} FileCourseRepository instance
+- List<Course> cache
++ {static} FileCourseRepository getInstance()
+- void initStorage()
++ void save(Course)
++ void delete(Course)
++ void delete(String)
++ Course findById(String)
++ List<Course> findAll()
++ List<Course> findByInstructor(String)
++ void refreshCache()
++ void update(Course)
+- void saveAllToFile()
+- void rewriteFile()
+}
+
+
+class main.java.com.yourorg.lms.model.course.Course {
+- {static} long serialVersionUID
+- String id
+- String title
+- String description
+- String instructorId
+- String status
++ String getId()
++ String getTitle()
++ String getDescription()
++ String getInstructorId()
++ String getStatus()
++ void setTitle(String)
++ void setDescription(String)
++ void setStatus(String)
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+abstract class main.java.com.yourorg.lms.model.user.User {
+- {static} long serialVersionUID
+- String id
+- String fullName
+- String email
+- String passwordHash
++ String getId()
++ String getFullName()
++ void setFullName(String)
++ String getEmail()
++ void setEmail(String)
++ String getName()
++ String getPasswordHash()
++ void setPasswordHash(String)
++ {abstract}String getRole()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class main.java.com.yourorg.lms.model.user.UserFactory {
++ {static} User createNewUser(String,String,String,String,String,String)
++ {static} User loadUser(String,String,String,String,String,String)
+}
+
+class main.java.com.yourorg.lms.ui.controller.SidebarController {
+- Button dashboardBtn
+- Button coursesBtn
+- Button teachingBtn
+- Button adminBtn
+- Button settingsBtn
+- Label userNameLabel
+- javafx.scene.layout.VBox sidebarVBox
++ void initialize()
+- void configureVisibility(String)
+- void handleDashboard()
+- void handleAdminTools()
+- void handleCourses()
+- void handleSettings()
+- void handleLogout()
+- void highlightActiveButton(Button)
+- void toggleSidebar()
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.RegisterController {
+- TextField fullNameField
+- TextField emailField
+- PasswordField passwordField
+- ComboBox<String> roleComboBox
+- TextField extraField
+- AuthService authService
++ void initialize()
+- void handleRegister()
+- void onBackToLogin()
+- void showAlert(Alert.AlertType,String,String)
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.SettingsController {
+- TextField nameField
+- TextField emailField
+- TextField roleField
+- PasswordField currentPassField
+- PasswordField newPassField
++ void initialize()
+- void handleSave()
+- void showAlert(Alert.AlertType,String,String)
+- void handleCancel()
+}
+
+
+class main.java.com.yourorg.lms.service.TaskService {
+- {static} TaskService instance
+- List<StudentTask> taskCache
++ {static} TaskService getInstance()
++ List<StudentTask> getTasksByStudent(String)
++ long getPendingTaskCount(String)
++ void addTask(StudentTask)
+}
+
+
+class main.java.com.yourorg.lms.ui.controller.StudentCoursesController {
+- VBox mainContainer
+- TableView<Course> enrolledTable
+- TableColumn<Course,String> colCourseCode
+- TextField searchField
+- TableView<Course> catalogTable
+- TableColumn<Course,String> colCatName
+- FilteredList<Course> filteredCatalog
++ void initialize()
+- void setupTableFactories()
+- void loadData()
+- void setupSearchLogic()
+- void handleEnroll()
+- void handleRootClick()
+}
+
+
+class main.java.com.yourorg.lms.ui.util.AlertUtil {
++ {static} void show(Alert.AlertType,String,String)
++ {static} boolean showConfirmation(String,String)
+}
+
+class main.java.com.yourorg.lms.service.AuthService {
+- {static} AuthService instance
+- UserRepository userRepository
++ {static} AuthService getInstance()
++ void login(String,String)
++ void register(String,String,String,String,String,String)
+}
+
+
+class main.java.com.yourorg.lms.service.AuthService$UserNotFoundException {
+}
+class main.java.com.yourorg.lms.service.AuthService$InvalidCredentialsException {
+}
+class main.java.com.yourorg.lms.app.Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+
+
+
+main.java.com.yourorg.lms.model.user.User <|-- main.java.com.yourorg.lms.model.user.Student
+main.java.com.yourorg.lms.model.user.User <|-- main.java.com.yourorg.lms.model.user.Instructor
+java.io.Serializable <|.. main.java.com.yourorg.lms.model.course.Enrollment
+main.java.com.yourorg.lms.repository.UserRepository <|.. main.java.com.yourorg.lms.repository.impl.FileUserRepository
+main.java.com.yourorg.lms.repository.EnrollmentRepository <|.. main.java.com.yourorg.lms.repository.impl.FileEnrollmentRepository
+main.java.com.yourorg.lms.model.user.User <|-- main.java.com.yourorg.lms.model.user.Admin
+main.java.com.yourorg.lms.repository.CourseRepository <|.. main.java.com.yourorg.lms.repository.impl.FileCourseRepository
+java.io.Serializable <|.. main.java.com.yourorg.lms.model.course.Course
+java.io.Serializable <|.. main.java.com.yourorg.lms.model.user.User
+main.java.com.yourorg.lms.service.AuthService +.. main.java.com.yourorg.lms.service.AuthService$UserNotFoundException
+main.java.com.yourorg.lms.service.RuntimeException <|-- main.java.com.yourorg.lms.service.AuthService$UserNotFoundException
+main.java.com.yourorg.lms.service.AuthService +.. main.java.com.yourorg.lms.service.AuthService$InvalidCredentialsException
+main.java.com.yourorg.lms.service.RuntimeException <|-- main.java.com.yourorg.lms.service.AuthService$InvalidCredentialsException
+javafx.application.Application <|-- main.java.com.yourorg.lms.app.Main
+@enduml

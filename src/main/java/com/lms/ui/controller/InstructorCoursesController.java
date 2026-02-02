@@ -11,12 +11,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import main.java.com.yourorg.lms.model.course.Course;
-import main.java.com.yourorg.lms.model.user.Instructor;
-import main.java.com.yourorg.lms.repository.impl.FileCourseRepository;
-import main.java.com.yourorg.lms.repository.impl.FileEnrollmentRepository;
-import main.java.com.yourorg.lms.ui.util.AlertUtil;
-import main.java.com.yourorg.lms.util.SessionManager;
+import main.java.com.lms.model.course.Course;
+import main.java.com.lms.model.user.Instructor;
+import main.java.com.lms.repository.impl.FileCourseRepository;
+import main.java.com.lms.repository.impl.FileEnrollmentRepository;
+import main.java.com.lms.ui.util.AlertUtil;
+import main.java.com.lms.util.SessionManager;
 
 public class InstructorCoursesController {
 

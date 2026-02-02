@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import main.java.com.yourorg.lms.model.user.User;
-import main.java.com.yourorg.lms.repository.impl.FileUserRepository;
-import main.java.com.yourorg.lms.util.SecurityUtil;
-import main.java.com.yourorg.lms.util.SessionManager;
+import main.java.com.lms.model.user.User;
+import main.java.com.lms.repository.impl.FileUserRepository;
+import main.java.com.lms.util.SecurityUtil;
+import main.java.com.lms.util.SessionManager;
 
 public class SettingsController {
 

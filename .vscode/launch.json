@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launcher",
+            "request": "launch",
+            "mainClass": "main.java.com.yourorg.lms.app.Launcher",
+            "projectName": "Java_f546a32"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "main.java.com.yourorg.lms.app.Main",
+            "projectName": "Java_f547a32"
+        },
+        {
+            "type": "java",
+            "name": "Launcher",
+            "request": "launch",
+            "mainClass": "main.java.com.yourorg.lms.app.Launcher",
+            "projectName": "Java_f547a32"
+        },
+        {
+            "type": "java",
+            "name": "Launch LMS",
+            "request": "launch",
+            "mainClass": "com.yourorg.lms.Main",
+            "vmArgs": "--module-path /usr/share/openjfx/lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="main.java.com.lms.ui.controller.InstructorCoursesController"
+            stylesheets="@css/styles.css">
+    
+    <left>
+        <fx:include source="components/Sidebar.fxml"/>
+    </left>
+
+    <center>
+        <VBox spacing="25" styleClass="main-container">
+            <padding>
+                <Insets top="30" right="40" bottom="30" left="40"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Course Management" styleClass="header-label" />
+                    <Label text="Manage your curriculum and students." style="-fx-text-fill: #7f8c8d;" />
+                </VBox>
+                <Button text="+ Create New Course" 
+                        onAction="#handleCreateCourse"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" defaultButton="true"/>
+            </HBox>
+
+            <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Button text="Edit Details" 
+                            onAction="#handleEditDetails" 
+                            styleClass="secondary-btn" />
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="View Students" 
+                                onAction="#handleViewStudents" 
+                                styleClass="secondary-btn" />
+                        <Region HBox.hgrow="ALWAYS"/>
+                    </HBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <TableView fx:id="myCoursesTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="100"/>
+                        <TableColumn fx:id="colTitle" text="Course Title" prefWidth="350"/>
+                        <TableColumn fx:id="colEnrollment" text="Students" prefWidth="120"/>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                    <placeholder>
+                        <Label text="You haven't created any courses yet. Click '+ Create New Course' to start."/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

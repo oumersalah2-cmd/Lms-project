@@ -11,11 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import main.java.com.yourorg.lms.model.course.Course;
-import main.java.com.yourorg.lms.model.user.Instructor;
-import main.java.com.yourorg.lms.repository.impl.FileCourseRepository;
-import main.java.com.yourorg.lms.repository.impl.FileEnrollmentRepository;
-import main.java.com.yourorg.lms.util.SessionManager;
+import main.java.com.lms.model.course.Course;
+import main.java.com.lms.model.user.Instructor;
+import main.java.com.lms.repository.impl.FileCourseRepository;
+import main.java.com.lms.repository.impl.FileEnrollmentRepository;
+import main.java.com.lms.util.SessionManager;
 
 public class InstructorDashboardController {
 

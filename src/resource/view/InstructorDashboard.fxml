@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="main.java.com.lms.ui.controller.InstructorDashboardController"
+            stylesheets="@css/styles.css">
+    <left>
+        <fx:include source="components/Sidebar.fxml"/>
+    </left>
+    <center>
+        <VBox spacing="25" styleClass="main-container">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
+            <VBox spacing="5">
+                <Label fx:id="welcomeLabel" text="Instructor Portal" styleClass="header-label" />
+                <Label text="Manage your classes " style="-fx-text-fill: #95a5a6;" />
+            </VBox>
+
+            <HBox spacing="20">
+                <VBox styleClass="card" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets  top="20" right="20" bottom="20" left="20"/></padding>
+                    <Label text="Courses Taught" style="-fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+                    <Label fx:id="taughtCountLabel" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                </VBox>
+               <VBox styleClass="stat-card">
+                    <Label text="Total Students" styleClass="stat-label"/>
+                    <Label fx:id="lblTotalStudents" text="0" styleClass="stat-value fx-text-fill: #7f8c8d; -fx-font-weight: bold;"/>
+                </VBox>
+            </HBox>
+
+            <VBox spacing="15" VBox.vgrow="ALWAYS" styleClass="card">
+                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                <Label text="Course Overview" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                <TableView fx:id="instructorCourseTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colCourseName" text="Course Name" prefWidth="300" />
+                        <TableColumn fx:id="colEnrollment" text="Students Enrolled" prefWidth="150" />
+                    </columns>
+                </TableView>
+            </VBox>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Delete Course" 
+                        onAction="#handleDeleteCourse" 
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

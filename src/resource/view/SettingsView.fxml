@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="main.java.com.lms.ui.controller.SettingsController"
+            stylesheets="@css/styles.css">
+    
+    <left>
+        <fx:include source="components/Sidebar.fxml"/>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+            <content>
+                <VBox spacing="30" styleClass="main-container" alignment="TOP_CENTER">
+                    <padding><Insets top="40" right="60" bottom="40" left="60"/></padding>
+
+                    <VBox spacing="5" alignment="CENTER_LEFT" maxWidth="700">
+                        <Label text="Account Settings" styleClass="header-label" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                        <Label text="Update your personal information and security preferences." style="-fx-text-fill: #7f8c8d; -fx-font-size: 14px;" />
+                    </VBox>
+
+                    <VBox styleClass="card" maxWidth="700" spacing="25">
+                        <padding><Insets top="35" right="40" bottom="35" left="40"/></padding>
+                        
+                        <Label text="Profile Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                        
+                        <GridPane hgap="25" vgap="20">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="120" prefWidth="150" halignment="LEFT"/>
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="250"/>
+                            </columnConstraints>
+
+                            <Label text="Full Name" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                            <TextField fx:id="nameField" promptText="Enter your name" GridPane.rowIndex="0" GridPane.columnIndex="1" prefHeight="35"/>
+
+                            <Label text="Email Address" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                            <TextField fx:id="emailField" editable="false" GridPane.rowIndex="1" GridPane.columnIndex="1" prefHeight="35" style="-fx-background-color: #f8f9fa; -fx-text-fill: #95a5a6;"/>
+
+                            <Label text="User Role" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                            <TextField fx:id="roleField" editable="false" GridPane.rowIndex="2" GridPane.columnIndex="1" prefHeight="35" style="-fx-background-color: #f8f9fa; -fx-text-fill: #95a5a6;"/>
+                        </GridPane>
+
+                        <Separator style="-fx-padding: 10 0 10 0;"/>
+
+                        <Label text="Security &amp; Password" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+                        <GridPane hgap="25" vgap="20">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="120" prefWidth="150" halignment="LEFT"/>
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="250"/>
+                            </columnConstraints>
+
+                            <Label text="Current Password" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                            <PasswordField fx:id="currentPassField" promptText="Required for password change" GridPane.rowIndex="0" GridPane.columnIndex="1" prefHeight="35"/>
+
+                            <Label text="New Password" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                            <PasswordField fx:id="newPassField" promptText="Enter new password" GridPane.rowIndex="1" GridPane.columnIndex="1" prefHeight="35"/>
+                        </GridPane>
+
+                        <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 20 0 0 0;">
+                            <Button text="Cancel" onAction="#handleCancel" styleClass="secondary-button" prefWidth="100" prefHeight="35" style="-fx-cursor: hand;"/>
+                            <Button text="Save Changes" onAction="#handleSave" prefWidth="150" prefHeight="35" 
+                                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

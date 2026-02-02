@@ -11,7 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import main.java.com.yourorg.lms.model.course.Course;
+import main.java.com.lms.model.course.Course;
 
 public class AdminCatalogController {
 

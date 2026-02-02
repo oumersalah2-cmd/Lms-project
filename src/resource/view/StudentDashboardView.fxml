@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="main.java.com.lms.ui.controller.StudentDashboardController"
+            stylesheets="@css/styles.css"
+            prefWidth="1000.0" prefHeight="700.0" 
+            maxWidth="1.7976931348623157E308" maxHeight="1.7976931348623157E308">
+
+    <left>
+        <fx:include source="components/Sidebar.fxml"/>
+    </left>
+
+    <center>
+        <VBox fx:id="mainContainer" 
+              focusTraversable="true" 
+              onMouseClicked="#handleRefresh"
+              spacing="20" 
+              styleClass="main-container" 
+              VBox.vgrow="ALWAYS" 
+              maxWidth="Infinity">
+            <padding>
+                <Insets top="30" right="40" bottom="30" left="40"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label fx:id="welcomeLabel" text="Welcome, Student" styleClass="header-label" />
+                    <Label text="LMS Student Portal | Dashboard" style="-fx-text-fill: #7f8c8d; -fx-font-size: 14px;" />
+                </VBox>
+                <Button text="Refresh Data" onAction="#handleRefresh" 
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;"/>
+            </HBox>
+
+            <HBox spacing="20">
+                <VBox styleClass="card" HBox.hgrow="ALWAYS" alignment="CENTER" prefHeight="120">
+                    <Label text="Active Courses" style="-fx-text-fill: #7f8c8d; -fx-font-size: 14px;" />
+                    <Label fx:id="activeCoursesCount" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                </VBox>
+               <VBox styleClass="card" 
+                HBox.hgrow="ALWAYS" 
+                alignment="CENTER" 
+                prefHeight="120"
+                onMouseClicked="#showTaskDialog"
+                style="-fx-cursor: hand;"> <Label text="Tasks Due" style="-fx-text-fill: #7f8c8d; -fx-font-size: 14px;" />
+                <Label fx:id="tasksDueCount" text="2" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #e67e22;" />
+            </VBox> 
+            </HBox>
+
+            <VBox spacing="10" VBox.vgrow="ALWAYS" styleClass="card" style="-fx-padding: 20;">
+                <Label text="Your Enrolled Courses" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+                
+                <TableView fx:id="courseTable" VBox.vgrow="ALWAYS">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+
+</BorderPane>

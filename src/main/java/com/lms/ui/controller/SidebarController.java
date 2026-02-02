@@ -6,9 +6,9 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import main.java.com.yourorg.lms.model.user.User;
-import main.java.com.yourorg.lms.ui.util.ViewFactory;
-import main.java.com.yourorg.lms.util.SessionManager;
+import main.java.com.lms.model.user.User;
+import main.java.com.lms.ui.util.ViewFactory;
+import main.java.com.lms.util.SessionManager;
 
 public class SidebarController {
 

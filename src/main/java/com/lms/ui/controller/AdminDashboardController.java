@@ -1,8 +1,8 @@
 package main.java.com.lms.ui.controller;
 
-import main.java.com.yourorg.lms.ui.util.AlertUtil;
+import main.java.com.lms.ui.util.AlertUtil;
 // import javax.swing.text.ViewFactory; // Removed incorrect import
-import main.java.com.yourorg.lms.ui.util.ViewFactory; // Add your custom ViewFactory import (adjust the package as needed)
+import main.java.com.lms.ui.util.ViewFactory; // Add your custom ViewFactory import (adjust the package as needed)
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,9 +16,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import main.java.com.yourorg.lms.model.user.User;
-import main.java.com.yourorg.lms.repository.impl.FileUserRepository;
-import main.java.com.yourorg.lms.util.SessionManager;
+import main.java.com.lms.model.user.User;
+import main.java.com.lms.repository.impl.FileUserRepository;
+import main.java.com.lms.util.SessionManager;
 
 public class AdminDashboardController {
 
